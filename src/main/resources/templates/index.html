@@ -1,0 +1,152 @@
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link rel="stylesheet" href="css/index.css" />
+  <link rel="stylesheet" href="css/bootstrap.css" />
+  <link rel="stylesheet" href="css/datepicker.material.css" />
+  <script type="text/javascript" src="js/jquery.js"></script>
+  <script type="text/javascript" src="js/index.js"></script>
+  <script type="text/javascript" src="js/bootstrap.js"></script>
+  <script type="text/javascript" src="js/datepicker.js"></script>
+
+</head>
+<script defer>
+  window.onload = () => {
+    downloadClinikAll();
+  }
+</script>
+
+<body style="background-color: #a6a6a6;">
+  <div class="input_hidden_all_info_selected" hidden="hidden">
+    <input class="table_act" value="off" hidden="hidden">
+  </div>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="#!"><img src="img/nauka.png"></a>
+
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+      <ul class="navbar-nav mr-auto mt-2 mt-md-0">
+        <li class="nav-item active">
+          <a class="nav-link" href="#!">Запись на приём <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#!">Результаты</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#!">Заполнение бланков</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#!">Что то там</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#!">И т.д</a>
+        </li>
+      </ul>
+    </div>
+    <div class="navber_user">
+      <div class="btn-group" role="group">
+        <button id="btnGroupDrop1" type="button"
+                class="btn btn-secondary dropdown-toggle"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Тест тестовна
+        </button>
+        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+          <a class="dropdown-item" href="#!">Выйти</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <section class="selected_tab">
+    <ul class="list-group">
+      <li class="list-group-item">Запись на приём</li>
+    </ul>
+  </section>
+  <section style="display: inline-flex; z-index: 1; width: 100%">
+    <div class="right_meny">
+      <div id="datepicker">
+        <input class="daterange" type="hidden" id="constrained" data-inline="true" data-multiple="true" data-open-on="today">
+      </div>
+      <div id="worker" class="list-group" style="overflow-y: scroll; height: 500px; padding: 10px; background-color: white;">
+
+      </div>
+      <div id="city-addres" class="list-group" hidden="hidden" style="overflow-y: scroll; height: 58%;overflow-y: scroll;position: absolute;top: 393px;margin: 0px 0px 0px 90px;width: 166px;">
+
+      </div>
+    </div>
+    <div class="main_content">
+      <table class="table table-bordered">
+        <thead>
+        <tr class="main_table_date">
+        </tr>
+        <tr class="main_table_name">
+        </tr>
+        </thead>
+        <tbody class="table_date_inification_for_doctors">
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <div class="dialog_add" hidden="hidden">
+    <div style="background-color: #575757;opacity: 0.4; width: 100%; height: 100%;"></div>
+    <div id= "dialog_block" class="dialog_block">
+      <img class="dialog_add_exit" src="img/close.png" style="width: 25px;height: 25px;margin-right: auto;position: absolute;right: inherit;margin: 15px 15px 0px 0px;"/>
+      <div id="dialog_at" class="dialog_add_title"></div>
+      <div id="dialog_select" class="dialog_add_form" style="height: 60%;padding-top: 30px; text-align: justify;"></div>
+    </div>
+  </div>
+</body>
+ <script>
+   document.getElementsByClassName('table_date_inification_for_doctors')[0].addEventListener('click',e => {
+     console.log(e);
+     try{
+       console.log(e.target.getAttribute('id'));
+       let id = e.target.getAttribute('id').split('_');
+       let type = e.target.getAttribute('style');
+       createElems(id,type);
+       document.getElementsByClassName('dialog_add')[0].removeAttribute('hidden');
+     }catch (t) {
+       console.log(e.target.getAttribute('class'));
+       let id = e.target.getAttribute('class').split('_');
+       let type = e.target.getAttribute('style');
+       createElems(id,type);
+       document.getElementsByClassName('dialog_add')[0].removeAttribute('hidden');
+     }
+   })
+ </script>
+  <script>
+    const dialog_add_exit = document.querySelectorAll('.dialog_add_exit');
+    dialog_add_exit.forEach(element => element.addEventListener('click', e => {
+      $('.dialog_add').attr('hidden', true);
+      document.getElementById('dialog_at').innerHTML ="";
+      document.getElementById('dialog_select').innerHTML="";
+    }))
+  </script>
+
+
+  <script>
+
+  </script>
+  <script>
+    var constrained = new Datepicker('#constrained', {
+
+      // 10 days in the past
+      min: (function(){
+        var date = new Date();
+        date.setDate(date.getDate() - 10);
+        return date;
+      })(),
+
+      // 10 days in the future
+      max: (function(){
+        var date = new Date();
+        date.setDate(date.getDate() + 10);
+        return date;
+      })()
+    });
+  </script>
+</html>
